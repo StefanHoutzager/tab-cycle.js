@@ -11,6 +11,6 @@ Caveats:
 - HTML Dialog elemets are accounted for.
 
 Acknowledgements: 
-- thanks to the the writer of https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element where I found a    
-  couple of ideas
+- thanks to the the writer of https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element 
+  where I found a couple of ideas
 - https://www.sitepoint.com/writing-javascript-with-accessibility-in-mind/  
