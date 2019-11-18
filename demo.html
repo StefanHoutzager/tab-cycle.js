@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module">
+      import * as tabOrder from './tab-cycle.js';
+      tabCycle.run();
+    </script>
+    <script>
+      // some code to demo the dialog element
+      window.addEventListener("DOMContentLoaded", () => {
+        const updateButton = document.getElementById('updateDetails');
+    	  const favDialog    = document.getElementById('favDialog');
+    	  const outputBox    = document.getElementsByTagName('output')[0];
+    	  const selectEl     = document.getElementsByTagName('select')[0];
+    	  const confirmBtn   = document.getElementById('confirmBtn');
+    	  const cancelBtn    = document.getElementById('cancelBtn');
+
+    	  // “Update details” button opens the <dialog> modally
+    	  updateButton.addEventListener('click', event => {
+    	    if (typeof favDialog.showModal === "function") {
+    	  	  favDialog.showModal();
+    	    } else {
+    	    	alert("The dialog API is not supported by this browser");
+    	    }
+        });
+        // "Favorite animal" input sets the value of the submit button
+        selectEl.addEventListener('change', event => {
+          confirmBtn.value = selectEl.value;
+        });
+
+        favDialog.addEventListener('close', event => {
+          alert("dialog close, return value is " + favDialog.returnValue)
+        });
+        // click handlers preventing the default refresh of the page in at least chrome 78.0.3904.97
+        confirmBtn.addEventListener('click', event => {
+          event.preventDefault();
+          favDialog.close(confirmBtn.value);
+        });
+
+        cancelBtn.addEventListener('click', event => {
+          event.preventDefault();
+          favDialog.close('');
+        });
+      });
+
+   	</script>
+  </head>
+  <body>
+    <form>
+      <input type="radio" name="group"  value="1"  autofocus>Group 1<br>
+      <input type="radio" name="group"  value="2" >Group 2<br>
+      <input type="radio" name="group"  value="3" >Group 3<br>
+      <h2>You can tab / backtab through this form without leaving it</h2>
+	    <h2 tabindex="0">A heading with <code>tabindex</code> attribute</h2>
+      <!-- Simple pop-up dialog box containing a form -->
+      <dialog id="favDialog">
+        <form method="dialog">
+          <h3>You can tab / backtab through this dialog without leaving it</h3>
+          <p><label>Favorite animal:
+            <select>
+              <option></option>
+              <option>Brine shrimp</option>
+              <option>Red panda</option>
+              <option>Spider monkey</option>
+            </select>
+          </label></p>
+          <menu>
+            <button id="cancelBtn" value="cancel">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+          </menu>
+        </form>
+      </dialog>
+      <menu>
+        <button id="updateDetails">Update details</button>
+      </menu>
+
+      First name: <input type="text"  id="first" name="firstname" ><br>
+      Last name:  <input type="text" ><br>
+      <a href="https://www.w3schools.com">Visit W3Schools</a><br>
+      <textarea>Textarea element.</textarea><br>
+      <button>Button element.</button><br>
+      <div contenteditable>Div with <code>contenteditable</code> attribute.</div>
+      <div tabindex="0">Div with <code>tabindex</code> attribute. Not editable, but tabbable.</div>
+
+      <input type="radio" name="gender" value="male" tabindex="0"> Male<br>
+      <input type="radio" name="gender" value="female" tabindex="0"> Female<br>
+      <input type="radio" name="gender" value="other" tabindex="0"> Other<br>
+    </form>
+  </body>
+</html>
