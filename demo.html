@@ -9,19 +9,19 @@
       // some code to demo the dialog element
       window.addEventListener("DOMContentLoaded", () => {
         const updateButton = document.getElementById('updateDetails');
-    	  const favDialog    = document.getElementById('favDialog');
-    	  const outputBox    = document.getElementsByTagName('output')[0];
-    	  const selectEl     = document.getElementsByTagName('select')[0];
-    	  const confirmBtn   = document.getElementById('confirmBtn');
-    	  const cancelBtn    = document.getElementById('cancelBtn');
-
+    	const favDialog    = document.getElementById('favDialog');
+        const outputBox    = document.getElementsByTagName('output')[0];
+    	const selectEl     = document.getElementsByTagName('select')[0];
+    	const confirmBtn   = document.getElementById('confirmBtn');
+    	const cancelBtn    = document.getElementById('cancelBtn');
+	      
     	  // “Update details” button opens the <dialog> modally
-    	  updateButton.addEventListener('click', event => {
-    	    if (typeof favDialog.showModal === "function") {
-    	  	  favDialog.showModal();
-    	    } else {
-    	    	alert("The dialog API is not supported by this browser");
-    	    }
+    	updateButton.addEventListener('click', event => {
+    	  if (typeof favDialog.showModal === "function") {
+    	    favDialog.showModal();
+    	  } else {
+    	    alert("The dialog API is not supported by this browser");
+    	  }
         });
         // "Favorite animal" input sets the value of the submit button
         selectEl.addEventListener('change', event => {
@@ -42,8 +42,7 @@
           favDialog.close('');
         });
       });
-
-   	</script>
+    </script>
   </head>
   <body>
     <form>
@@ -51,7 +50,7 @@
       <input type="radio" name="group"  value="2" >Group 2<br>
       <input type="radio" name="group"  value="3" >Group 3<br>
       <h2>You can tab / backtab through this form without leaving it</h2>
-	    <h2 tabindex="0">A heading with <code>tabindex</code> attribute</h2>
+      <h2 tabindex="0">A heading with <code>tabindex</code> attribute</h2>
       <!-- Simple pop-up dialog box containing a form -->
       <dialog id="favDialog">
         <form method="dialog">
