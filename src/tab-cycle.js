@@ -1,4 +1,4 @@
-  const isTabPressed = e  => e.key === 'Tab' || e.keyCode === 9;
+  const isTabPressed = e => e.key === 'Tab' || e.keyCode === 9;
 
   const focusableElements = (rootElement) => rootElement.querySelectorAll(
     'a[href]:not([disabled]), ' +
