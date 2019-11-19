@@ -8,7 +8,7 @@ Caveats:
   (when back tab is pressed) focusable one. After that the element is filtered that should get focus. In this
   way changes to enabling or dynamically deleted / added elements during actions after load are accounted for.
 - Radiogroups - <input> elements of type radio in a collection identified with a name - are treated as a whole. 
-- HTML Dialog elemets are accounted for.
+- HTML Dialog elements are accounted for.
 
 Acknowledgements: 
 - thanks to the the writer of https://hiddedevries.nl/en/blog/2017-01-29-using-javascript-to-trap-focus-in-an-element 
