@@ -1,14 +1,16 @@
   const isTabPressed = e => e.key === 'Tab' || e.keyCode === 9;
 
-  const focusableElements = (rootElement) => rootElement.querySelectorAll(
-    'a[href]:not([disabled]), ' +
-    'button:not([disabled]), ' +
-    'select:not([disabled]), ' +
+  const focusableElements = (rootElement) => 
+    [...rootElement.querySelectorAll(
+    'a[href], ' +
+    'button, ' +
+    'select, ' +
     '[href], ' +
-    'textarea:not([disabled]), ' +
-    'input:not([disabled]), ' +
-    'select:not([disabled]), ' +
-    '[tabindex]:not([tabindex="-1"]');
+    'textarea, ' +
+    'input, ' +
+    'select, ' +
+    '[tabindex]:not([tabindex="-1"]')
+	].filter(element => ![...document.querySelectorAll(":disabled")].includes(element)); // filter out disabled elements
 
   const lastFocusableElements = (rootElement) =>
     radioElementsOrElement(focusableElements(rootElement)[focusableElements(rootElement).length - 1]);
