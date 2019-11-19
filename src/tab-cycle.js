@@ -40,7 +40,7 @@
     Array.isArray(elements) ? elements.includes(document.activeElement) : elements === document.activeElement;
 
   const run = () => {
-	document.body.addEventListener('keydown', e => {
+    document.body.addEventListener('keydown', e => {
       if (!isTabPressed(e)) {
         return;
       }
@@ -51,7 +51,6 @@
           e.preventDefault();
         }
       } else /* tab */ {
-		  console.log(focusableElements());
         if (focusableIsActive(lastFocusableElements())) {
           firstFocusableElement().focus();
           e.preventDefault();
