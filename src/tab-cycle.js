@@ -10,7 +10,7 @@
     'input, ' +
     'select, ' +
     '[tabindex]:not([tabindex="-1"]')
-	].filter(element => ![...document.querySelectorAll(":disabled")].includes(element)); // filter out disabled elements
+    ].filter(element => ![...document.querySelectorAll(":disabled")].includes(element)); // filter out disabled elements
 
   const lastFocusableElements = (rootElement) =>
     radioElementsOrElement(focusableElements(rootElement)[focusableElements(rootElement).length - 1]);
