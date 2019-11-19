@@ -1,28 +1,32 @@
-  const isTabPressed = e => e.key === 'Tab' || e.keyCode === 9;
+  const isTabPressed = e  => e.key === 'Tab' || e.keyCode === 9;
 
-  const focusableElements = (rootElement) => 
-    [...rootElement.querySelectorAll(
-    'a[href], ' +
-    'button, ' +
-    'select, ' +
-    '[href], ' +
-    'textarea, ' +
-    'input, ' +
-    'select, ' +
-    '[tabindex]:not([tabindex="-1"]')
-    ].filter(element => ![...document.querySelectorAll(":disabled")].includes(element)); // filter out disabled elements
-
-  const lastFocusableElements = (rootElement) =>
-    radioElementsOrElement(focusableElements(rootElement)[focusableElements(rootElement).length - 1]);
-
+  const focusableElements = () => {
+    const rootElement = document.activeElement.closest("dialog") != null ? document.activeElement.closest("dialog") : document.body;
+	
+    return [...rootElement.querySelectorAll(
+      'a[href], ' +
+      'button, ' +
+      'select, ' +
+      '[href], ' +
+      'textarea, ' +
+      'input, ' +
+      'select, ' +
+      '[tabindex]:not([tabindex="-1"]')]
+	   .filter(element => ![...document.querySelectorAll(":disabled")].includes(element))
+	   .filter(element => rootElement.tagName === 'DIALOG' ? element.closest("dialog") != null : element.closest("dialog") == null);
+   }
+   
+  const lastFocusableElements = () =>
+    radioElementsOrElement(focusableElements()[focusableElements().length - 1]);   
+	 
   const lastFocusableElement = (rootElement) =>
-    getFirstElement(lastFocusableElements(rootElement));
+    getFirstElement(lastFocusableElements());
 
-  const firstFocusableElements = (rootElement) =>
-    radioElementsOrElement(focusableElements(rootElement)[0]);
-
-  const firstFocusableElement = (rootElement) =>
-    getFirstElement(firstFocusableElements(rootElement));
+  const firstFocusableElements = () =>
+    radioElementsOrElement(focusableElements()[0]);	
+	
+  const firstFocusableElement = () =>
+    getFirstElement(firstFocusableElements());	
 
   const getFirstElement = (elements) =>
     Array.isArray(elements) ? elements[0] : elements;
@@ -36,24 +40,23 @@
     Array.isArray(elements) ? elements.includes(document.activeElement) : elements === document.activeElement;
 
   const run = () => {
-    document
-    .querySelectorAll('dialog, body')
-    .forEach(rootElement => rootElement.addEventListener('keydown', e => {
+	document.body.addEventListener('keydown', e => {
       if (!isTabPressed(e)) {
         return;
       }
 
       if (e.shiftKey) /* shift + tab */ {
-        if (focusableIsActive(firstFocusableElements(rootElement))) {
-  	  lastFocusableElement(rootElement).focus();
+        if (focusableIsActive(firstFocusableElements())) {
+          lastFocusableElement().focus();
           e.preventDefault();
         }
       } else /* tab */ {
-        if (focusableIsActive(lastFocusableElements(rootElement))) {
-          firstFocusableElement(rootElement).focus();
+		  console.log(focusableElements());
+        if (focusableIsActive(lastFocusableElements())) {
+          firstFocusableElement().focus();
           e.preventDefault();
         }
       }
-    }));
+    });	  
   }
   export {run};
