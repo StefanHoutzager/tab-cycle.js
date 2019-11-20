@@ -10,7 +10,6 @@
       '[href], ' +
       'textarea, ' +
       'input, ' +
-      'select, ' +
       '[tabindex]:not([tabindex="-1"]')]
      .filter(element => !element.disabled) 
      // when rootElement is a body element filter out elements for which a dialog element can be found when traversing it's parents:	  
