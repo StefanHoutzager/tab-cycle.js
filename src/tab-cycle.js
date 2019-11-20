@@ -4,12 +4,17 @@
     const rootElement = document.activeElement.closest("dialog") != null ? document.activeElement.closest("dialog") : document.body;
 	
     return [...rootElement.querySelectorAll(
-      'a[href], ' +
       'button, ' +
       'select, ' +
-      '[href], ' +
+      'a[href], ' +
+      'area[href], ' +
+      '[contentEditable=""], ' +
+      '[contentEditable="true"], ' + 
+      '[contentEditable="TRUE"], ' +	  
       'textarea, ' +
+      'iframe, ' +	  
       'input, ' +
+      'details, ' +	 
       '[tabindex]:not([tabindex="-1"]')]
      .filter(element => !element.disabled) 
      // when rootElement is a body element filter out elements for which a dialog element can be found when traversing it's parents:	  
