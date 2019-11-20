@@ -12,7 +12,7 @@
       'input, ' +
       'select, ' +
       '[tabindex]:not([tabindex="-1"]')]
-     .filter(element => ![...document.querySelectorAll(":disabled")].includes(element))
+     .filter(element => !element.disabled) 
      .filter(element => rootElement.tagName === 'DIALOG' ? element.closest("dialog") != null : element.closest("dialog") == null);
    }
    
