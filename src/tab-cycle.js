@@ -13,7 +13,8 @@
       'select, ' +
       '[tabindex]:not([tabindex="-1"]')]
      .filter(element => !element.disabled) 
-     .filter(element => rootElement.tagName === 'DIALOG' ? element.closest("dialog") != null : element.closest("dialog") == null);
+     // when rootElement is a body element filter out elements for which a dialog element can be found when traversing it's parents:	  
+     .filter(element => rootElement.tagName === 'DIALOG' ? true : element.closest("dialog") === null);  
    }
    
   const lastFocusableElements = () =>
