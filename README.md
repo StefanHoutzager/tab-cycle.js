@@ -8,6 +8,7 @@ Caveats:
   (when back tab is pressed) focusable one. After that the element is filtered that should get focus. In this
   way changes to enabling or dynamically deleted / added elements during actions after load are accounted for.
 - Radiogroups - <input> elements of type radio in a collection identified with a name - are treated as a whole. 
+- Tabable elements can be found here: https://allyjs.io/data-tables/focusable.html
 - HTML Dialog elements are accounted for.
 
 Acknowledgements: 
