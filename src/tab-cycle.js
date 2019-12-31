@@ -1,30 +1,29 @@
-  const isTabPressed = e  => e.key === 'Tab' || e.keyCode === 9;
+    const isTabPressed = e  => e.key === 'Tab' || e.keyCode === 9;
 
   const focusableElements = () => {
     const rootElement = document.activeElement.closest("dialog") != null ? document.activeElement.closest("dialog") : document.body;
-	
+
     return [...rootElement.querySelectorAll(
       'button, ' +
       'select, ' +
       'a[href], ' +
       'area[href], ' +
-      '[contentEditable=""], ' +
+	  '[contentEditable=""], ' +
       '[contentEditable="true"], ' + 
-      '[contentEditable="TRUE"], ' +	  
+      '[contentEditable="TRUE"], '+	  
       'textarea, ' +
       'iframe, ' +	  
       'input, ' +
-      'details, ' +	 
+      'summary, ' +	  
       '[tabindex]:not([tabindex="-1"]')]
-     .filter(element => !element.disabled) 
-     // when rootElement is a body element filter out elements for which a dialog element can be found when traversing it's parents:	  
-     .filter(element => rootElement.tagName === 'DIALOG' ? true : element.closest("dialog") === null);  
+      .filter(element => !element.disabled) 
+      .filter(element => rootElement.tagName === 'DIALOG' ? true : element.closest("dialog") === null); 
    }
    
   const lastFocusableElements = () =>
     radioElementsOrElement(focusableElements()[focusableElements().length - 1]);   
 	 
-  const lastFocusableElement = (rootElement) =>
+  const lastFocusableElement = () =>
     getFirstElement(lastFocusableElements());
 
   const firstFocusableElements = () =>
@@ -42,9 +41,11 @@
     element;
 
   const focusableIsActive = (elements) =>
-    Array.isArray(elements) ? elements.includes(document.activeElement) : elements === document.activeElement;
+    Array.isArray(elements) ? elements.includes(document.activeElement) : elements.contains(document.activeElement); 
 
   const run = () => {
+    firstFocusableElement().focus();
+	
     document.body.addEventListener('keydown', e => {
       if (!isTabPressed(e)) {
         return;
@@ -55,7 +56,7 @@
           lastFocusableElement().focus();
           e.preventDefault();
         }
-      } else /* tab */ {
+      } else /* tab */ { 
         if (focusableIsActive(lastFocusableElements())) {
           firstFocusableElement().focus();
           e.preventDefault();
